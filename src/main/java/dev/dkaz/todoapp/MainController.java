@@ -25,6 +25,22 @@ public class MainController implements Initializable {
         locationColumn.setCellValueFactory(param -> param.getValue().locationProperty());
         priorityColumn.setCellValueFactory(param -> param.getValue().priorityProperty());
 
+        editColumn.setCellValueFactory(param -> {
+            Image image = new Image(getClass().getResource("/dev/dkaz/todoapp/pen.png").toString());
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(true);
+            imageView.setSmooth(true);
+            imageView.setFitHeight(20);
+
+            Button button = new Button();
+            button.setGraphic(imageView);
+            button.setBackground(null);
+            button.setPadding(Insets.EMPTY);
+            button.setTooltip(new Tooltip("Edit this task"));
+            button.setOnAction(event -> EditTaskController.create(param.getValue()));
+            return new SimpleObjectProperty<>(button);
+        });
+
         deleteColumn.setCellValueFactory(param -> {
             Image image = new Image(getClass().getResource("/dev/dkaz/todoapp/delete.png").toString());
             ImageView imageView = new ImageView(image);
@@ -37,9 +53,7 @@ public class MainController implements Initializable {
             button.setBackground(null);
             button.setPadding(Insets.EMPTY);
             button.setTooltip(new Tooltip("Delete this task"));
-            button.setOnAction(event -> {
-                taskTable.getItems().remove(param.getValue());
-            });
+            button.setOnAction(event -> taskTable.getItems().remove(param.getValue()));
             return new SimpleObjectProperty<>(button);
         });
     }
