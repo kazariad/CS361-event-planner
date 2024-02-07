@@ -23,6 +23,12 @@ public class CreateTaskController extends VBox {
     }
 
     private void init() {
+        stage = new Stage();
+        stage.setScene(new Scene(this));
+        stage.setTitle("Add New Task");
+        stage.setResizable(false);
+        stage.setOnHidden(event -> clearForm());
+
         priorityChoiceBox.getItems().addAll(Task.TaskPriority.values());
 
         saveButton.setOnAction(event -> {
@@ -36,13 +42,6 @@ public class CreateTaskController extends VBox {
         });
 
         cancelButton.setOnAction(event -> stage.hide());
-
-
-        stage = new Stage();
-        stage.setScene(new Scene(this));
-        stage.setTitle("Add New Task");
-        stage.setResizable(false);
-        stage.setOnHidden(event -> clearForm());
     }
 
     public void show() {

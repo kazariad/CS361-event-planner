@@ -2,21 +2,38 @@ package dev.dkaz.eventplanner;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.net.URL;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        addTaskButton.setOnAction(event -> Main.createTaskController.show());
+public class MainController extends VBox {
+    public MainController() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainController.class.getResource("main-view.fxml"));
+            loader.setRoot(this);
+            loader.setController(this);
+            loader.load();
+            init();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void init() {
+        stage = new Stage();
+        stage.setScene(new Scene(this));
+        stage.setTitle("Event Planner");
+        stage.setResizable(false);
+
+        createTaskButton.setOnAction(event -> Main.createTaskController.show());
 
         dateColumn.setCellValueFactory(param -> param.getValue().dateProperty());
         eventColumn.setCellValueFactory(param -> param.getValue().eventProperty());
@@ -62,12 +79,18 @@ public class MainController implements Initializable {
         });
     }
 
+    public void show() {
+        stage.show();
+    }
+
     public void addTask(Task task) {
         taskTable.getItems().add(task);
     }
 
+    private Stage stage;
+
     @FXML
-    private Button addTaskButton;
+    private Button createTaskButton;
 
     @FXML
     private TableView<Task> taskTable;

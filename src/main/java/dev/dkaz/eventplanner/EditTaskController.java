@@ -29,6 +29,12 @@ public class EditTaskController extends VBox {
     }
 
     private void init() {
+        stage = new Stage();
+        stage.setScene(new Scene(this));
+        stage.setTitle("Edit Task");
+        stage.setResizable(false);
+        stage.show();
+
         datePicker.setValue(task.getDate());
         eventTextArea.setText(task.getEvent());
         locationTextField.setText(task.getLocation());
@@ -44,12 +50,6 @@ public class EditTaskController extends VBox {
         });
 
         cancelButton.setOnAction(event -> stage.hide());
-
-        stage = new Stage();
-        stage.setScene(new Scene(this));
-        stage.setTitle("Edit Task");
-        stage.setResizable(false);
-        stage.show();
     }
 
     private Task task;
