@@ -33,6 +33,10 @@ public class MainController extends VBox {
         stage.setTitle("Event Planner");
         stage.setResizable(false);
 
+        helpImageView.setOnMouseClicked(event -> {
+            Main.helpController.show();
+        });
+
         createTaskButton.setOnAction(event -> Main.createTaskController.show());
 
         dateColumn.setCellValueFactory(param -> param.getValue().dateProperty());
@@ -88,6 +92,9 @@ public class MainController extends VBox {
     }
 
     private Stage stage;
+
+    @FXML
+    private ImageView helpImageView;
 
     @FXML
     private Button createTaskButton;

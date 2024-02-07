@@ -8,6 +8,7 @@ public class Main extends Application {
     public static Image editIcon;
     public static Image deleteIcon;
     public static CreateTaskController createTaskController;
+    public static HelpController helpController;
     public static MainController mainController;
 
     public static void main(String[] args) {
@@ -19,6 +20,7 @@ public class Main extends Application {
         editIcon = new Image(getClass().getResource("/dev/dkaz/eventplanner/pen.png").toString());
         deleteIcon = new Image(getClass().getResource("/dev/dkaz/eventplanner/delete.png").toString());
         createTaskController = new CreateTaskController();
+        helpController = new HelpController();
         mainController = new MainController();
         mainController.show();
     }

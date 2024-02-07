@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import java.time.LocalDate;
 
 public class Task {
-    public enum TaskPriority {LOW, MEDIUM, HIGH}
+    public enum TaskPriority {HIGH, MEDIUM, LOW}
 
     private final SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root alignment="TOP_CENTER" prefHeight="350.0" prefWidth="360.0" spacing="35.0" type="VBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <children>
+      <Label text="To add a new task to the planner, click the &quot;Create New Task&quot; button and fill out the form.  All fields are optional.  Click &quot;Save&quot; once finished to create the task, or &quot;Cancel&quot; to exit.&#10;&#10;To modify an existing task, click its Pencil icon and fill out the editing form.  Click &quot;Save&quot; to persist your changes, or &quot;Cancel&quot; to revert all changes back to the task's original data.&#10;&#10;To delete a task, click its Trash icon and accept the confirmation message, or cancel to retain the task.&#10;" wrapText="true" VBox.vgrow="ALWAYS" />
+      <Button fx:id="okButton" mnemonicParsing="false" prefWidth="55.0" text="OK" />
+   </children>
+</fx:root>
