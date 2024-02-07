@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="960.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.dkaz.todoapp.MainController">
+   <children>
+      <Button fx:id="addTaskButton" mnemonicParsing="false" prefWidth="150.0" text="Add New Task" />
+      <TableView fx:id="taskTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="dateColumn" editable="false" prefWidth="160.0" sortable="false" style="-fx-alignment: CENTER;" text="Date" />
+            <TableColumn fx:id="eventColumn" editable="false" prefWidth="300.0" sortable="false" style="-fx-alignment: CENTER;" text="Event" />
+            <TableColumn fx:id="locationColumn" editable="false" prefWidth="225.0" sortable="false" style="-fx-alignment: CENTER;" text="Location" />
+            <TableColumn fx:id="priorityColumn" editable="false" prefWidth="160.0" sortable="false" style="-fx-alignment: CENTER;" text="Priority" />
+            <TableColumn fx:id="editColumn" editable="false" prefWidth="50.0" sortable="false" style="-fx-alignment: CENTER;" />
+            <TableColumn fx:id="deleteColumn" editable="false" prefWidth="50.0" sortable="false" style="-fx-alignment: CENTER;" />
+        </columns>
+      </TableView>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
