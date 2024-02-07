@@ -1,4 +1,4 @@
-package dev.dkaz.todoapp;
+package dev.dkaz.eventplanner;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="720.0" prefWidth="960.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.dkaz.todoapp.MainController">
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="960.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.dkaz.eventplanner.MainController">
    <children>
       <Button fx:id="addTaskButton" mnemonicParsing="false" prefWidth="150.0" text="Add New Task" />
       <TableView fx:id="taskTable" VBox.vgrow="ALWAYS">

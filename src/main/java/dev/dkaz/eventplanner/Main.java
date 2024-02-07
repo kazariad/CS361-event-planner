@@ -1,4 +1,4 @@
-package dev.dkaz.todoapp;
+package dev.dkaz.eventplanner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

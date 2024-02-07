@@ -1,4 +1,4 @@
-package dev.dkaz.todoapp;
+package dev.dkaz.eventplanner;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -26,7 +26,7 @@ public class MainController implements Initializable {
         priorityColumn.setCellValueFactory(param -> param.getValue().priorityProperty());
 
         editColumn.setCellValueFactory(param -> {
-            Image image = new Image(getClass().getResource("/dev/dkaz/todoapp/pen.png").toString());
+            Image image = new Image(getClass().getResource("/dev/dkaz/eventplanner/pen.png").toString());
             ImageView imageView = new ImageView(image);
             imageView.setPreserveRatio(true);
             imageView.setSmooth(true);
@@ -42,7 +42,7 @@ public class MainController implements Initializable {
         });
 
         deleteColumn.setCellValueFactory(param -> {
-            Image image = new Image(getClass().getResource("/dev/dkaz/todoapp/delete.png").toString());
+            Image image = new Image(getClass().getResource("/dev/dkaz/eventplanner/delete.png").toString());
             ImageView imageView = new ImageView(image);
             imageView.setPreserveRatio(true);
             imageView.setSmooth(true);

@@ -3,6 +3,6 @@ module dev.dkaz.todoapp {
     requires javafx.fxml;
 
 
-    opens dev.dkaz.todoapp to javafx.fxml;
-    exports dev.dkaz.todoapp;
+    opens dev.dkaz.eventplanner to javafx.fxml;
+    exports dev.dkaz.eventplanner;
 }
