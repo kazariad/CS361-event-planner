@@ -1,15 +1,28 @@
 package dev.dkaz.eventplanner;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
-public class CreateTaskController implements Initializable {
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+public class CreateTaskController extends VBox {
+    public CreateTaskController() {
+        try {
+            FXMLLoader loader = new FXMLLoader(CreateTaskController.class.getResource("create-task-view.fxml"));
+            loader.setRoot(this);
+            loader.setController(this);
+            loader.load();
+            init();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void init() {
         priorityChoiceBox.getItems().addAll(Task.TaskPriority.values());
 
         saveButton.setOnAction(event -> {
@@ -19,12 +32,21 @@ public class CreateTaskController implements Initializable {
             task.setLocation(locationTextField.getText());
             task.setPriority(priorityChoiceBox.getValue());
             Main.mainController.addTask(task);
-            Main.createTaskStage.hide();
+            stage.hide();
         });
 
-        cancelButton.setOnAction(event -> Main.createTaskStage.hide());
+        cancelButton.setOnAction(event -> stage.hide());
 
-        Main.createTaskStage.setOnHidden(event -> clearForm());
+
+        stage = new Stage();
+        stage.setScene(new Scene(this));
+        stage.setTitle("Add New Task");
+        stage.setResizable(false);
+        stage.setOnHidden(event -> clearForm());
+    }
+
+    public void show() {
+        stage.show();
     }
 
     private void clearForm() {
@@ -33,6 +55,8 @@ public class CreateTaskController implements Initializable {
         locationTextField.clear();
         priorityChoiceBox.setValue(null);
     }
+
+    private Stage stage;
 
     @FXML
     private DatePicker datePicker;

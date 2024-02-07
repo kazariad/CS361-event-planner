@@ -4,12 +4,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -18,7 +16,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addTaskButton.setOnAction(event -> Main.createTaskStage.show());
+        addTaskButton.setOnAction(event -> Main.createTaskController.show());
 
         dateColumn.setCellValueFactory(param -> param.getValue().dateProperty());
         eventColumn.setCellValueFactory(param -> param.getValue().eventProperty());
@@ -26,8 +24,7 @@ public class MainController implements Initializable {
         priorityColumn.setCellValueFactory(param -> param.getValue().priorityProperty());
 
         editColumn.setCellValueFactory(param -> {
-            Image image = new Image(getClass().getResource("/dev/dkaz/eventplanner/pen.png").toString());
-            ImageView imageView = new ImageView(image);
+            ImageView imageView = new ImageView(Main.editIcon);
             imageView.setPreserveRatio(true);
             imageView.setSmooth(true);
             imageView.setFitHeight(20);
@@ -42,8 +39,7 @@ public class MainController implements Initializable {
         });
 
         deleteColumn.setCellValueFactory(param -> {
-            Image image = new Image(getClass().getResource("/dev/dkaz/eventplanner/delete.png").toString());
-            ImageView imageView = new ImageView(image);
+            ImageView imageView = new ImageView(Main.deleteIcon);
             imageView.setPreserveRatio(true);
             imageView.setSmooth(true);
             imageView.setFitHeight(20);
@@ -53,7 +49,15 @@ public class MainController implements Initializable {
             button.setBackground(null);
             button.setPadding(Insets.EMPTY);
             button.setTooltip(new Tooltip("Delete this task"));
-            button.setOnAction(event -> taskTable.getItems().remove(param.getValue()));
+            button.setOnAction(event -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this task?");
+                alert.setHeaderText(null);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                ((Stage) alert.getDialogPane().getScene().getWindow()).setAlwaysOnTop(true);
+                if (alert.showAndWait().get() == ButtonType.OK) {
+                    taskTable.getItems().remove(param.getValue());
+                }
+            });
             return new SimpleObjectProperty<>(button);
         });
     }
