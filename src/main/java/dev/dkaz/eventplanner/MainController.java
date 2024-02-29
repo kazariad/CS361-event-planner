@@ -1,9 +1,11 @@
 package dev.dkaz.eventplanner;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -81,6 +83,11 @@ public class MainController extends VBox {
             });
             return new SimpleObjectProperty<>(button);
         });
+
+        motdLabel.setOnMouseEntered(e -> stage.getScene().setCursor(Cursor.HAND));
+        motdLabel.setOnMouseExited(e -> stage.getScene().setCursor(Cursor.DEFAULT));
+        motdLabel.setOnMousePressed(e -> updateMotd());
+        updateMotd();
     }
 
     public void show() {
@@ -89,6 +96,18 @@ public class MainController extends VBox {
 
     public void addTask(Task task) {
         taskTable.getItems().add(task);
+    }
+
+    private void updateMotd() {
+        Main.executorService.submit(() -> {
+            try {
+                String motd = Main.motdService.getMotd();
+                Platform.runLater(() -> motdLabel.setText(motd));
+            } catch (Exception e) {
+                Platform.runLater(() -> motdLabel.setText("Error"));
+                e.printStackTrace();
+            }
+        });
     }
 
     private Stage stage;
@@ -119,4 +138,7 @@ public class MainController extends VBox {
 
     @FXML
     private TableColumn<Task, Button> deleteColumn;
+
+    @FXML
+    private Label motdLabel;
 }

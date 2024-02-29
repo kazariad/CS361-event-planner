@@ -29,7 +29,7 @@
             </ImageView>
          </children>
          <VBox.margin>
-            <Insets bottom="15.0" />
+            <Insets />
          </VBox.margin>
       </StackPane>
       <Button fx:id="createTaskButton" mnemonicParsing="false" text="Create New Task">
@@ -50,6 +50,11 @@
             <TableColumn fx:id="deleteColumn" editable="false" prefWidth="50.0" sortable="false" style="-fx-alignment: CENTER;" />
         </columns>
       </TableView>
+      <StackPane>
+         <children>
+            <Label fx:id="motdLabel" text="MOTD" StackPane.alignment="CENTER" />
+         </children>
+      </StackPane>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
