@@ -17,9 +17,9 @@ public class Main extends Application {
     public static MotdService motdService;
     public static VersionService versionService;
 
+    public static MainController mainController;
     public static CreateTaskController createTaskController;
     public static HelpController helpController;
-    public static MainController mainController;
 
     public static Image editIcon;
     public static Image deleteIcon;
@@ -38,9 +38,11 @@ public class Main extends Application {
         editIcon = new Image(getClass().getResource("/dev/dkaz/eventplanner/pen.png").toString());
         deleteIcon = new Image(getClass().getResource("/dev/dkaz/eventplanner/delete.png").toString());
 
+        mainController = new MainController(stage);
         createTaskController = new CreateTaskController();
         helpController = new HelpController();
-        mainController = new MainController();
+
+        stage.setOnCloseRequest(e -> executorService.shutdownNow());
         mainController.show();
     }
 }

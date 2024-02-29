@@ -17,8 +17,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class MainController extends VBox {
-    public MainController() {
+    public MainController(Stage stage) {
         try {
+            this.stage = stage;
+
             FXMLLoader loader = new FXMLLoader(MainController.class.getResource("main-view.fxml"));
             loader.setRoot(this);
             loader.setController(this);
@@ -30,7 +32,6 @@ public class MainController extends VBox {
     }
 
     private void init() {
-        stage = new Stage();
         stage.setScene(new Scene(this));
         stage.setTitle("Event Planner");
         stage.setResizable(false);
