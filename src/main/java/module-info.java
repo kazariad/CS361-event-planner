@@ -1,4 +1,4 @@
-module dev.dkaz.todoapp {
+module dev.dkaz.eventplanner {
     requires javafx.controls;
     requires javafx.fxml;
 
