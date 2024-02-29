@@ -53,6 +53,7 @@
       <StackPane>
          <children>
             <Label fx:id="motdLabel" text="MOTD" StackPane.alignment="CENTER" />
+            <Label fx:id="versionLabel" text="Version" StackPane.alignment="CENTER_RIGHT" />
          </children>
       </StackPane>
    </children>

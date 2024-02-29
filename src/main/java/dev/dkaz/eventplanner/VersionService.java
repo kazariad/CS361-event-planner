@@ -5,17 +5,17 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class MotdService {
+public class VersionService {
     private final HttpClient httpClient;
-    private final URI motdUri;
+    private final URI versionUrl;
 
-    public MotdService(HttpClient httpClient, URI motdUri) {
+    public VersionService(HttpClient httpClient, URI versionUrl) {
         this.httpClient = httpClient;
-        this.motdUri = motdUri;
+        this.versionUrl = versionUrl;
     }
 
-    public String getMotd() throws Exception {
-        HttpRequest request = HttpRequest.newBuilder(motdUri).GET().build();
+    public String getVersion() throws Exception {
+        HttpRequest request = HttpRequest.newBuilder(versionUrl).GET().build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() != 200) {
             throw new Exception("HTTP status code = " + response.statusCode());

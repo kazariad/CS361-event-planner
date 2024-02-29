@@ -74,6 +74,7 @@ public class MainController extends VBox {
             button.setTooltip(new Tooltip("Delete this task"));
             button.setOnAction(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this task?");
+                alert.setTitle("Delete");
                 alert.setHeaderText(null);
                 alert.initModality(Modality.APPLICATION_MODAL);
                 ((Stage) alert.getDialogPane().getScene().getWindow()).setAlwaysOnTop(true);
@@ -88,6 +89,11 @@ public class MainController extends VBox {
         motdLabel.setOnMouseExited(e -> stage.getScene().setCursor(Cursor.DEFAULT));
         motdLabel.setOnMousePressed(e -> updateMotd());
         updateMotd();
+
+        versionLabel.setText(Main.VERSION);
+        versionLabel.setOnMouseEntered(e -> stage.getScene().setCursor(Cursor.HAND));
+        versionLabel.setOnMouseExited(e -> stage.getScene().setCursor(Cursor.DEFAULT));
+        versionLabel.setOnMousePressed(e -> checkVersion());
     }
 
     public void show() {
@@ -104,7 +110,29 @@ public class MainController extends VBox {
                 String motd = Main.motdService.getMotd();
                 Platform.runLater(() -> motdLabel.setText(motd));
             } catch (Exception e) {
-                Platform.runLater(() -> motdLabel.setText("Error"));
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void checkVersion() {
+        Main.executorService.submit(() -> {
+            try {
+                String version = Main.versionService.getVersion();
+                Platform.runLater(() -> {
+                    Alert alert = null;
+                    if (Main.VERSION.equalsIgnoreCase(version)) {
+                        alert = new Alert(Alert.AlertType.INFORMATION, String.format("You already have the most recent version (%s).", Main.VERSION));
+                    } else {
+                        alert = new Alert(Alert.AlertType.WARNING, String.format("A new version is available, please update as soon as possible (%s).", version));
+                    }
+                    alert.setTitle("Version");
+                    alert.setHeaderText(null);
+                    alert.initModality(Modality.APPLICATION_MODAL);
+                    ((Stage) alert.getDialogPane().getScene().getWindow()).setAlwaysOnTop(true);
+                    alert.showAndWait();
+                });
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
@@ -141,4 +169,7 @@ public class MainController extends VBox {
 
     @FXML
     private Label motdLabel;
+
+    @FXML
+    private Label versionLabel;
 }
